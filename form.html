@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="myForm">
+        <input type="text" name="inputField" placeholder="Enter something">
+        <button type="submit" id="submitButton" disabled>Submit</button>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("myForm");
+            const submitButton = document.getElementById("submitButton");
+
+            // Function to check if the current time is within the specified range
+            function isTimeInRange(startHour, endHour) {
+                const now = new Date();
+                const currentHour = now.getHours();
+                return currentHour >= startHour && currentHour < endHour;
+            }
+
+            // Enable or disable the submit button based on the current time
+            function updateButtonState() {
+                if (isTimeInRange(6, 17)) {
+                    submitButton.disabled = false; // Enable from 6 AM to 6 PM
+                } else {
+                    submitButton.disabled = true;  // Disable from 6 PM to 6 AM
+                }
+            }
+
+            // Initial state check when the page loads
+            updateButtonState();
+
+            // Check and update button state every minute
+            setInterval(updateButtonState, 60000); // Check every 60 seconds
+        });
+
+    </script>
+</body>
+
+</html>
